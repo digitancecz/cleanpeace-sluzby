@@ -221,7 +221,6 @@ p{margin:0}
 }
 @media (max-width:480px){
   .usp ul{grid-template-columns:minmax(0,1fr)}
-  .site-header .btn{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important;scroll-behavior:auto !important}
@@ -296,7 +295,7 @@ p{margin:0}
 .btn .icon{width:20px;height:20px;stroke-width:2}
 .btn-call{white-space:nowrap}
 @media (max-width:480px){
-  .site-header .btn{display:inline-flex}
   .site-header .btn-line{display:none}
   .site-header .btn-call{padding:0 16px}
 }
+@media (max-width:374px){.logo img{height:32px}.site-header .btn-call{padding:0 12px;font-size:14px}.site-header .btn-call .icon{width:16px;height:16px}}
