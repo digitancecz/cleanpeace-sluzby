@@ -307,3 +307,4 @@ p{margin:0}
   .call-txt{display:inline}
   .m-block{display:block}
 }
+.h1-accent{display:block;margin-top:10px;color:var(--teal);font-size:.62em;line-height:1.2}
