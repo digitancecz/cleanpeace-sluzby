@@ -17,6 +17,13 @@
     });
   }
 
+  // Logo vrací na začátek stránky (bez přidání # do adresy)
+  var logo = document.querySelector('.site-header .logo[href="#"]');
+  if (logo) logo.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   window.dataLayer = window.dataLayer || [];
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[data-cta]');
