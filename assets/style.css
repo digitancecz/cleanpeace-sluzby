@@ -299,3 +299,11 @@ p{margin:0}
   .site-header .btn-call{padding:0 16px}
 }
 @media (max-width:374px){.logo img{height:32px}.site-header .btn-call{padding:0 12px;font-size:14px}.site-header .btn-call .icon{width:16px;height:16px}}
+
+/* Mobil: „Zavolat“ místo čísla v záhlaví, zalomení řádku v FAQ */
+.call-txt{display:none}
+@media (max-width:600px){
+  .call-num{display:none}
+  .call-txt{display:inline}
+  .m-block{display:block}
+}
