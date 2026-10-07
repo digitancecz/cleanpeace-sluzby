@@ -1,4 +1,7 @@
 /* CleanPeace – služby (sluzby.cleanpeace.cz) */
+/* Asap – hostováno lokálně (bez přenosu IP adres na Google před souhlasem) */
+@font-face{font-family:Asap;font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/asap-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Asap;font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/asap-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --navy:#04354B;
   --deep:#02455A;
@@ -254,3 +257,56 @@ p{margin:0}
 .team-visual::after{content:"";position:absolute;left:8%;right:8%;top:6%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.18);transform:scale(.88)}
 .team-visual img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(4,53,75,.25))}
 @media (max-width:900px){.team-visual{max-width:340px}}
+
+/* Fotka majitelky – odsazení odspodu */
+.final--photo .final-photo{margin-bottom:56px}
+.contact-photo{margin-bottom:40px}
+@media (max-width:900px){.final--photo .final-photo{margin-bottom:40px}.contact-photo{margin-bottom:32px}}
+
+/* Patička – autor */
+.site-footer .credit{white-space:nowrap}
+.site-footer .credit a{color:#9DB8C1}
+.site-footer button.linklike{background:none;border:0;padding:0;font:inherit;color:#C5DCE2;text-decoration:underline;cursor:pointer}
+.site-footer button.linklike:hover{color:#fff}
+
+/* Cookie lišta */
+.cc{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;display:none;justify-content:center;pointer-events:none}
+.cc--open{display:flex}
+.cc-box{pointer-events:auto;width:100%;max-width:760px;max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 20px 60px rgba(4,53,75,.28);border:1px solid var(--line);padding:24px 28px;display:flex;flex-direction:column;gap:14px}
+.cc-title{font-size:20px}
+.cc-text{font-size:15px;line-height:1.55;color:var(--muted)}
+.cc-text a{font-weight:600}
+.cc-prefs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.cc-prefs[hidden]{display:none}
+.cc-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px;line-height:1.45;color:var(--muted)}
+.cc-row strong{display:block;font-size:16px;color:var(--navy)}
+.cc-row input{position:absolute;opacity:0;width:1px;height:1px}
+.cc-sw{flex:none;position:relative;width:46px;height:26px;border-radius:13px;background:#C3CDD1;transition:background .15s}
+.cc-sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+.cc-row input:checked+.cc-sw{background:var(--teal)}
+.cc-row input:checked+.cc-sw::after{transform:translateX(20px)}
+.cc-row input:disabled+.cc-sw{opacity:.55}
+.cc-row input:disabled{cursor:not-allowed}
+.cc-row input:focus-visible+.cc-sw{outline:3px solid var(--teal);outline-offset:2px}
+.cc-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.cc-actions [hidden]{display:none}
+.cc-btn-main{background:var(--teal);color:#fff;min-width:150px}
+.cc-btn-main:hover{background:var(--teal-d);color:#fff}
+.cc-btn-settings{color:var(--navy);border-color:var(--navy);margin-right:auto}
+.cc-btn-settings:hover{background:var(--navy);color:#fff}
+@media (max-width:900px){
+  .cc{left:8px;right:8px;bottom:8px}
+  .cc-box{padding:20px 18px;border-radius:16px}
+  .cc-actions .btn{width:auto;flex:1 1 140px}
+  .cc-btn-settings{margin-right:0;order:3;flex-basis:100% !important}
+  html.cc-visible .mbar{visibility:hidden}
+}
+
+/* Telefon jako hlavní CTA */
+.btn .icon{width:20px;height:20px;stroke-width:2}
+.btn-call{white-space:nowrap}
+@media (max-width:480px){
+  .site-header .btn{display:inline-flex}
+  .site-header .btn-line{display:none}
+  .site-header .btn-call{padding:0 16px}
+}

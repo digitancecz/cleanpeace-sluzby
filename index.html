@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/consent.js"></script>
 <meta name="robots" content="noindex, follow">
 <title>Úklid a tepování v Praze – CleanPeace</title>
 <meta name="description" content="Úklid bytů a domů a tepování sedaček, koberců a matrací v Praze a okolí. Cenu spočítáte online, platíte až po práci.">
@@ -17,10 +18,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<!-- GTM: vložit kontejner CleanPeace + Consent Mode v2 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/asap-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-service="rozcestnik">
@@ -39,7 +37,7 @@
 <a class="logo" href="https://cleanpeace.cz/"><img src="assets/logo.svg" width="178" height="50" alt="CleanPeace"></a>
 <div class="header-right">
 <nav class="nav" aria-label="Služby"><a href="uklid/">Úklid</a><a href="tepovani/">Tepování</a></nav>
-<a class="tel" href="tel:+420776762071" data-cta="phone" data-loc="header"><svg class="icon"><use href="#i-phone"/></svg><span>+420 776 762 071</span></a>
+<a class="btn btn-app btn-sm btn-call" href="tel:+420776762071" data-cta="phone" data-loc="header"><svg class="icon"><use href="#i-phone"/></svg>776 762 071</a>
 </div>
 </div>
 </header>
@@ -106,11 +104,11 @@
 <div class="contact">
 <img class="contact-photo" src="assets/img/cleanpeace-kontakt.webp" width="600" height="786" alt="Zákaznická podpora CleanPeace" loading="lazy">
 <div class="contact-body">
-<h2>Víte, co chcete? Objednejte rovnou.</h2>
-<p class="lead" style="max-width:520px">Nebo zavolejte – poradíme, jaký úklid či tepování zvolit, a rovnou domluvíme termín.</p>
+<h2>Zavolejte, poradíme a domluvíme termín.</h2>
+<p class="lead" style="max-width:520px">Řekneme vám, jaký úklid či tepování zvolit, kolik to bude stát a kdy můžeme přijet. Raději online? Cenu si spočítáte i sami.</p>
 <div class="cta-row">
-<a class="btn btn-app btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="contact">Spočítat cenu a objednat</a>
-<a class="btn btn-line btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="contact">Zavolat 776 762 071</a>
+<a class="btn btn-app btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="contact"><svg class="icon"><use href="#i-phone"/></svg>Zavolat 776 762 071</a>
+<a class="btn btn-line btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="contact">Spočítat cenu online</a>
 </div>
 </div>
 </div>
@@ -139,17 +137,18 @@
 
 <footer class="site-footer">
 <div class="wrap">
-<span>Provozuje BE CORRECT s.r.o., Karlovo náměstí 557/30, Praha · IČ 194 95 170</span>
+<span>Provozuje BE CORRECT s.r.o., Karlovo náměstí 557/30, Praha · IČ 194 95 170 · <span class="credit">Web: <a href="https://lukaskoula.com" target="_blank" rel="noopener">Lukáš Koula</a></span></span>
 <nav aria-label="Právní informace">
 <a href="https://cleanpeace.cz/wp-content/uploads/2025/07/VOP-CleanPeace-B2C.pdf">Obchodní podmínky</a>
 <a href="https://cleanpeace.cz/wp-content/uploads/2025/07/Privacy-Policy-CleanPeace-2.pdf">Ochrana osobních údajů</a>
+<button type="button" class="linklike" data-cc-open>Nastavení cookies</button>
 </nav>
 </div>
 </footer>
 
 <div class="mbar">
-<a class="btn btn-line" href="tel:+420776762071" data-cta="phone" data-loc="mbar">Zavolat</a>
-<a class="btn btn-app" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="mbar">Spočítat cenu</a>
+<a class="btn btn-line" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="mbar">Online</a>
+<a class="btn btn-app" href="tel:+420776762071" data-cta="phone" data-loc="mbar"><svg class="icon"><use href="#i-phone"/></svg>Zavolat</a>
 </div>
 
 <script src="assets/main.js" defer></script>

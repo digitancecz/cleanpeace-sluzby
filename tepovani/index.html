@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../assets/consent.js"></script>
 <meta name="robots" content="noindex, follow">
 <title>Tepování Praha – CleanPeace</title>
 <meta name="description" content="Tepování sedaček, koberců a matrací v Praze a okolí. Vlastní technika i prostředky, termín i o víkendu, platba až po tepování.">
@@ -17,10 +18,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<!-- GTM: vložit kontejner CleanPeace + Consent Mode v2 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/asap-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="../assets/img/tepovani-koberce-praha.webp">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -41,8 +39,8 @@
 <a class="logo" href="https://cleanpeace.cz/"><img src="../assets/logo.svg" width="178" height="50" alt="CleanPeace"></a>
 <div class="header-right">
 <nav class="nav" aria-label="Služby"><a href="../uklid/">Úklid</a><a href="./" aria-current="page">Tepování</a></nav>
-<a class="tel hide-m" href="tel:+420776762071" data-cta="phone" data-loc="header"><svg class="icon"><use href="#i-phone"/></svg><span>+420 776 762 071</span></a>
-<a class="btn btn-app btn-sm" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="header">Objednat tepování</a>
+<a class="btn btn-line btn-sm hide-m" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="header">Objednat online</a>
+<a class="btn btn-app btn-sm btn-call" href="tel:+420776762071" data-cta="phone" data-loc="header"><svg class="icon"><use href="#i-phone"/></svg>776 762 071</a>
 </div>
 </div>
 </header>
@@ -55,8 +53,8 @@
 <h1>Tepování sedaček, koberců a matrací v Praze</h1>
 <p class="hero-lead">Přijedeme s vlastní technikou i čisticími prostředky, klidně o víkendu. Cenu spočítáte online hned a platíte až po tepování.</p>
 <div class="cta-row" style="margin-top:8px">
-<a class="btn btn-app btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="hero">Spočítat cenu tepování</a>
-<a class="btn btn-line btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="hero">Zavolat 776 762 071</a>
+<a class="btn btn-app btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="hero"><svg class="icon"><use href="#i-phone"/></svg>Zavolat 776 762 071</a>
+<a class="btn btn-line btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="hero">Spočítat cenu online</a>
 </div>
 </div>
 <div class="hero-photo">
@@ -124,7 +122,7 @@
 <li><svg class="icon"><use href="#i-check"/></svg><span><strong>Osvěžená barva</strong> – textil po vyčištění znovu prokoukne</span></li>
 </ul>
 <div class="cta-row">
-<a class="btn btn-white btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="ba">Spočítat cenu tepování</a>
+<a class="btn btn-white btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="ba"><svg class="icon"><use href="#i-phone"/></svg>Zavolat 776 762 071</a>
 </div>
 </div>
 </div>
@@ -189,10 +187,10 @@
 <img class="final-photo" src="../assets/img/cleanpeace-kontakt.webp" width="600" height="786" alt="Majitelka CleanPeace" loading="lazy">
 <div class="stack" style="gap:18px">
 <h2>Sedačka jako nová? Stačí pár kliků.</h2>
-<p>Spočítejte si cenu a vyberte termín online, nebo zavolejte a domluvíme se po telefonu.</p>
+<p>Zavolejte – poradíme a termín domluvíme hned po telefonu. Nebo si cenu spočítejte a objednejte online.</p>
 <div class="cta-row">
-<a class="btn btn-white btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="final">Objednat tepování online</a>
-<a class="btn btn-line-w btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="final">Zavolat 776 762 071</a>
+<a class="btn btn-white btn-lg" href="tel:+420776762071" data-cta="phone" data-loc="final"><svg class="icon"><use href="#i-phone"/></svg>Zavolat 776 762 071</a>
+<a class="btn btn-line-w btn-lg" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="final">Objednat tepování online</a>
 </div>
 </div>
 </div>
@@ -202,19 +200,20 @@
 <!-- FOOTER -->
 <footer class="site-footer">
 <div class="wrap">
-<span>Provozuje BE CORRECT s.r.o., Karlovo náměstí 557/30, Praha · IČ 194 95 170</span>
+<span>Provozuje BE CORRECT s.r.o., Karlovo náměstí 557/30, Praha · IČ 194 95 170 · <span class="credit">Web: <a href="https://lukaskoula.com" target="_blank" rel="noopener">Lukáš Koula</a></span></span>
 <nav aria-label="Právní informace">
 <a href="../">Všechny služby</a>
 <a href="https://cleanpeace.cz/wp-content/uploads/2025/07/VOP-CleanPeace-B2C.pdf">Obchodní podmínky</a>
 <a href="https://cleanpeace.cz/wp-content/uploads/2025/07/Privacy-Policy-CleanPeace-2.pdf">Ochrana osobních údajů</a>
+<button type="button" class="linklike" data-cc-open>Nastavení cookies</button>
 </nav>
 </div>
 </footer>
 
 <!-- MOBILNÍ LIŠTA -->
 <div class="mbar">
-<a class="btn btn-line" href="tel:+420776762071" data-cta="phone" data-loc="mbar">Zavolat</a>
-<a class="btn btn-app" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="mbar">Objednat tepování</a>
+<a class="btn btn-line" href="https://app.cleanpeace.cz/" data-cta="app" data-loc="mbar">Online</a>
+<a class="btn btn-app" href="tel:+420776762071" data-cta="phone" data-loc="mbar"><svg class="icon"><use href="#i-phone"/></svg>Zavolat</a>
 </div>
 
 <script src="../assets/main.js" defer></script>
