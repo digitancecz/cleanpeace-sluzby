@@ -185,13 +185,11 @@ p{margin:0}
 
 /* Patička */
 .site-footer{background:var(--navy);color:#9DB8C1;padding:28px 0 36px;font-size:14px}
-.site-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
-.site-footer nav{display:flex;flex-wrap:wrap;gap:18px}
+.site-footer .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.site-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px}
 .site-footer a{color:#C5DCE2}
 .site-footer a:hover{color:#fff}
 
-/* Mobilní lišta */
-.mbar{display:none}
 
 @media (max-width:1024px){
   .usp ul{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -220,10 +218,6 @@ p{margin:0}
   .hide-m{display:none !important}
   .btn{width:100%}
   .site-header .btn{width:auto}
-  .mbar{display:flex;position:sticky;bottom:0;z-index:40;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(4,53,75,.08)}
-  .mbar .btn{min-height:50px;padding:0 12px;font-size:15px}
-  .mbar .btn-line{flex:1}
-  .mbar .btn-app{flex:1.4}
 }
 @media (max-width:480px){
   .usp ul{grid-template-columns:minmax(0,1fr)}
@@ -261,13 +255,10 @@ p{margin:0}
 /* Fotka majitelky – odsazení odspodu */
 .final--photo .final-photo{margin-bottom:56px}
 .contact-photo{margin-bottom:40px}
-@media (max-width:900px){.final--photo .final-photo{margin-bottom:40px}.contact-photo{margin-bottom:32px}}
+@media (max-width:900px){.final--photo .final-photo{margin-bottom:64px}.contact-photo{margin-bottom:48px}}
 
 /* Patička – autor */
-.site-footer .credit{white-space:nowrap}
 .site-footer .credit a{color:#9DB8C1}
-.site-footer button.linklike{background:none;border:0;padding:0;font:inherit;color:#C5DCE2;text-decoration:underline;cursor:pointer}
-.site-footer button.linklike:hover{color:#fff}
 
 /* Cookie lišta */
 .cc{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;display:none;justify-content:center;pointer-events:none}
@@ -299,7 +290,6 @@ p{margin:0}
   .cc-box{padding:20px 18px;border-radius:16px}
   .cc-actions .btn{width:auto;flex:1 1 140px}
   .cc-btn-settings{margin-right:0;order:3;flex-basis:100% !important}
-  html.cc-visible .mbar{visibility:hidden}
 }
 
 /* Telefon jako hlavní CTA */
