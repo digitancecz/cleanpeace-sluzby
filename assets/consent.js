@@ -12,7 +12,7 @@
      'basic'    – GTM se načte až po udělení souhlasu (nejkonzervativnější varianta). */
 (function () {
   var CFG = {
-    gtmId: '',                // TODO: doplnit ID vlastního kontejneru, např. 'GTM-XXXXXXX' (prázdné = GTM se nenačte)
+    gtmId: 'GTM-PLNTTTM7',
     mode: 'advanced',
     version: 1,               // zvýšením se lišta zobrazí znovu všem
     daysAccept: 365,

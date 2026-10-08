@@ -21,5 +21,5 @@ Statické landing pages pro kampaně CleanPeace (GitHub Pages).
 4. Po ověření domény zapnout **Enforce HTTPS**.
 
 ## Před spuštěním doplnit
-- ID vlastního GTM kontejneru do `assets/consent.js` → `CFG.gtmId`. V GTM nastavit u tagů kontrolu souhlasu (GA4 → `analytics_storage`, Google Ads / Sklik / Meta → `ad_storage`); pro vlastní triggery je k dispozici událost `consent_update` s proměnnými `consent_analytics` a `consent_marketing`.
+- GTM kontejner GTM-PLNTTTM7 se načítá z `assets/consent.js` (`CFG.gtmId`) až po nastavení výchozího souhlasu – snippet do HTML nevkládat (dvojí načtení), noscript iframe záměrně vynechán (obcházel by souhlas). V GTM nastavit u tagů kontrolu souhlasu (GA4 → `analytics_storage`, Google Ads / Sklik / Meta → `ad_storage`); pro vlastní triggery je k dispozici událost `consent_update` s proměnnými `consent_analytics` a `consent_marketing`.
 - Místa označená `TODO` (orientační ceny, rozsah okolí, zakomentované FAQ): `grep -rn TODO --include=*.html .`
