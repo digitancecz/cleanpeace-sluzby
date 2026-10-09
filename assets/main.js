@@ -17,11 +17,16 @@
     });
   }
 
-  // Logo vrací na začátek stránky (bez přidání # do adresy)
-  var logo = document.querySelector('.site-header .logo[href="#"]');
+  // Logo vrací na začátek stránky. Odkaz #top funguje i bez JS; skript posouvá plynule
+  // a pokud prohlížeč plynulý posun přeruší (iOS při dojíždění scrollu), dorovná to okamžitě.
+  var logo = document.querySelector('.site-header .logo[href="#top"]');
   if (logo) logo.addEventListener('click', function (e) {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, 0); }
+    setTimeout(function () {
+      if (window.pageYOffset > 0) { document.documentElement.scrollTop = 0; document.body.scrollTop = 0; window.scrollTo(0, 0); }
+    }, 700);
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   });
 
   window.dataLayer = window.dataLayer || [];
