@@ -5,7 +5,8 @@
    - Volba se ukládá do cookie cp_consent na .cleanpeace.cz (12 měsíců, při odmítnutí 6 měsíců).
    - Souhlas lze kdykoliv změnit/odvolat odkazem s atributem [data-cc-open] (v patičce).
    - Při odvolání smaže existující měřicí cookies.
-   - Do dataLayer posílá událost consent_update (consent_analytics / consent_marketing) pro triggery v GTM.
+   - Do dataLayer posílá událost consent_update (consent_analytics / consent_marketing / consent_choice / consent_source).
+     consent_choice: accept_all | reject | custom; consent_source: banner (volba teď) | stored (načteno z cookie).
 
    MODE:
      'advanced' – GTM se načte vždy, tagy běží v režimu "denied" (cookieless pingy, modelace konverzí).
@@ -80,7 +81,7 @@
   }
 
   /* ---------- aplikace souhlasu ---------- */
-  function apply(s) {
+  function apply(s, source) {
     var a = s.a ? 'granted' : 'denied', m = s.m ? 'granted' : 'denied';
     gtag('consent', 'update', {
       analytics_storage: a,
@@ -89,18 +90,24 @@
       ad_user_data: m,
       ad_personalization: m
     });
-    w.dataLayer.push({ event: 'consent_update', consent_analytics: s.a, consent_marketing: s.m });
+    w.dataLayer.push({
+      event: 'consent_update',
+      consent_analytics: s.a,
+      consent_marketing: s.m,
+      consent_choice: s.c || (s.a && s.m ? 'accept_all' : (!s.a && !s.m ? 'reject' : 'custom')),
+      consent_source: source || 'stored'
+    });
   }
 
   var state = read();
-  if (state) apply(state);
+  if (state) apply(state, 'stored');
   if (CFG.mode === 'advanced' || (state && (state.a || state.m))) loadGTM();
 
-  function save(a, m) {
+  function save(a, m, choice) {
     var prev = state;
-    state = { v: CFG.version, a: !!a, m: !!m, ts: new Date().toISOString() };
+    state = { v: CFG.version, a: !!a, m: !!m, c: choice, ts: new Date().toISOString() };
     write(state);
-    apply(state);
+    apply(state, 'banner');
     if (prev && prev.a && !state.a) purge(/^(_ga|_gid|_gat|_clck|_clsk)/);
     if (prev && prev.m && !state.m) purge(/^(_gcl|_fbp|_fbc|_uet|sid|udid|_ttp)/);
     if (state.a || state.m) loadGTM();
@@ -115,18 +122,20 @@
     box = el(
       '<div class="cc" role="dialog" aria-modal="false" aria-labelledby="cc-title" aria-describedby="cc-desc">' +
         '<div class="cc-box">' +
-          '<h2 id="cc-title" class="cc-title">Cookies a vaše soukromí</h2>' +
-          '<p id="cc-desc" class="cc-text">Nezbytné cookies potřebujeme, aby web fungoval. S vaším souhlasem použijeme také analytické cookies k měření návštěvnosti a marketingové cookies k měření a zobrazování reklam (např. Google Ads, Sklik). Souhlas můžete kdykoliv změnit nebo odvolat v patičce webu přes „Nastavení cookies“. Více v <a href="' + CFG.privacyUrl + '" target="_blank" rel="noopener">zásadách ochrany osobních údajů</a>.</p>' +
+          '<h2 id="cc-title" class="cc-title">Můžeme použít cookies?</h2>' +
+          '<p id="cc-desc" class="cc-text">Cookies nám pomáhají zjistit, které reklamy fungují a jak web zlepšit. Bez nich web funguje taky. Volbu můžete kdykoliv změnit v patičce. <a href="' + CFG.privacyUrl + '" target="_blank" rel="noopener">Více o ochraně údajů</a></p>' +
           '<div class="cc-prefs" hidden>' +
             '<label class="cc-row"><span><strong>Nezbytné</strong>Zajišťují základní funkce webu a uložení vaší volby. Nelze je vypnout.</span><input type="checkbox" checked disabled><i class="cc-sw" aria-hidden="true"></i></label>' +
             '<label class="cc-row"><span><strong>Analytické</strong>Měření návštěvnosti a chování na webu (Google Analytics), abychom mohli web zlepšovat.</span><input type="checkbox" data-cc-cat="a"><i class="cc-sw" aria-hidden="true"></i></label>' +
             '<label class="cc-row"><span><strong>Marketingové</strong>Měření účinnosti reklam a jejich přizpůsobení (Google Ads, Sklik a další reklamní systémy).</span><input type="checkbox" data-cc-cat="m"><i class="cc-sw" aria-hidden="true"></i></label>' +
           '</div>' +
           '<div class="cc-actions">' +
-            '<button type="button" class="btn btn-sm cc-btn-settings" data-cc="settings">Nastavení</button>' +
-            '<button type="button" class="btn btn-sm cc-btn-settings" data-cc="save" hidden>Uložit výběr</button>' +
-            '<button type="button" class="btn btn-sm cc-btn-main" data-cc="reject">Odmítnout vše</button>' +
+            '<button type="button" class="btn btn-sm cc-btn-main" data-cc="reject">Odmítnout</button>' +
             '<button type="button" class="btn btn-sm cc-btn-main" data-cc="accept">Přijmout vše</button>' +
+          '</div>' +
+          '<div class="cc-more">' +
+            '<button type="button" class="cc-link" data-cc="settings">Nastavení</button>' +
+            '<button type="button" class="btn btn-sm cc-btn-save" data-cc="save" hidden>Uložit výběr</button>' +
           '</div>' +
         '</div>' +
       '</div>'
@@ -135,10 +144,10 @@
       var b = e.target.closest('[data-cc]');
       if (!b) return;
       var act = b.getAttribute('data-cc');
-      if (act === 'accept') save(true, true);
-      else if (act === 'reject') save(false, false);
+      if (act === 'accept') save(true, true, 'accept_all');
+      else if (act === 'reject') save(false, false, 'reject');
       else if (act === 'settings') showPrefs();
-      else if (act === 'save') save(q('[data-cc-cat="a"]').checked, q('[data-cc-cat="m"]').checked);
+      else if (act === 'save') save(q('[data-cc-cat="a"]').checked, q('[data-cc-cat="m"]').checked, 'custom');
     });
     box.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && state) close();

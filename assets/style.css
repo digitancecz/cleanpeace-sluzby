@@ -259,16 +259,16 @@ p{margin:0}
 /* Patička – autor */
 .site-footer .credit a{color:#9DB8C1}
 
-/* Cookie lišta */
+/* Cookie lišta – kompaktní, dole; Odmítnout a Přijmout vše stejně velké a stejně výrazné */
 .cc{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;display:none;justify-content:center;pointer-events:none}
 .cc--open{display:flex}
-.cc-box{pointer-events:auto;width:100%;max-width:760px;max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 20px 60px rgba(4,53,75,.28);border:1px solid var(--line);padding:24px 28px;display:flex;flex-direction:column;gap:14px}
-.cc-title{font-size:20px}
-.cc-text{font-size:15px;line-height:1.55;color:var(--muted)}
-.cc-text a{font-weight:600}
+.cc-box{pointer-events:auto;width:100%;max-width:640px;max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 16px 48px rgba(4,53,75,.24);border:1px solid var(--line);padding:20px 24px;display:flex;flex-direction:column;gap:12px}
+.cc-title{font-size:18px}
+.cc-text{font-size:15px;line-height:1.5;color:var(--muted)}
+.cc-text a{font-weight:600;white-space:nowrap}
 .cc-prefs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .cc-prefs[hidden]{display:none}
-.cc-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px;line-height:1.45;color:var(--muted)}
+.cc-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px;line-height:1.45;color:var(--muted)}
 .cc-row strong{display:block;font-size:16px;color:var(--navy)}
 .cc-row input{position:absolute;opacity:0;width:1px;height:1px}
 .cc-sw{flex:none;position:relative;width:46px;height:26px;border-radius:13px;background:#C3CDD1;transition:background .15s}
@@ -278,17 +278,22 @@ p{margin:0}
 .cc-row input:disabled+.cc-sw{opacity:.55}
 .cc-row input:disabled{cursor:not-allowed}
 .cc-row input:focus-visible+.cc-sw{outline:3px solid var(--teal);outline-offset:2px}
-.cc-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
-.cc-actions [hidden]{display:none}
-.cc-btn-main{background:var(--teal);color:#fff;min-width:150px}
+.cc-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cc-btn-main{width:100%;background:var(--teal);color:#fff}
 .cc-btn-main:hover{background:var(--teal-d);color:#fff}
-.cc-btn-settings{color:var(--navy);border-color:var(--navy);margin-right:auto}
-.cc-btn-settings:hover{background:var(--navy);color:#fff}
+.cc-more{display:flex;align-items:center;justify-content:center;gap:12px}
+.cc-more [hidden]{display:none}
+.cc-link{background:none;border:0;padding:6px 8px;font:inherit;font-size:15px;font-weight:600;color:var(--deep);text-decoration:underline;cursor:pointer;min-height:36px}
+.cc-link:hover{color:var(--navy)}
+.cc-btn-save{color:var(--navy);border-color:var(--navy);width:100%}
+.cc-btn-save:hover{background:var(--navy);color:#fff}
+.cc-prefs:not([hidden])~.cc-more .cc-link{display:none}
 @media (max-width:900px){
-  .cc{left:8px;right:8px;bottom:8px}
-  .cc-box{padding:20px 18px;border-radius:16px}
-  .cc-actions .btn{width:auto;flex:1 1 140px}
-  .cc-btn-settings{margin-right:0;order:3;flex-basis:100% !important}
+  .cc{left:0;right:0;bottom:0}
+  .cc-box{max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding:16px 16px calc(12px + env(safe-area-inset-bottom));gap:10px;max-height:85vh}
+  .cc-title{font-size:16px}
+  .cc-text{font-size:14px}
+  .cc-actions .btn{min-height:48px;width:100%}
 }
 
 /* Telefon jako hlavní CTA */
@@ -331,3 +336,14 @@ p{margin:0}
 .review .stars{font-size:17px}
 .review blockquote{margin:0;font-size:16px;line-height:1.6;color:var(--ink)}
 @media (max-width:900px){.reviews-head{align-items:flex-start}}
+
+/* Cena v hero */
+.hero-price{font-size:18px;line-height:1.45;color:var(--muted);max-width:540px}
+.hero-price strong{color:var(--teal);font-weight:800;font-size:20px}
+@media (max-width:900px){.hero-price{font-size:16px}.hero-price strong{font-size:18px}}
+/* Mobil: cena v hero musí být vidět i nad otevřenou cookie lištou */
+@media (max-width:900px){
+  .hero-photo{min-height:240px;order:1}
+  .hero-text{padding-top:28px;padding-bottom:32px}
+  .cc-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
