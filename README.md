@@ -12,7 +12,7 @@ Statické landing pages pro kampaně CleanPeace (GitHub Pages).
 - `assets/fonts/` – font Asap hostovaný lokálně (žádné požadavky na Google před souhlasem)
 - `assets/style.css` – sdílené styly, `assets/main.js` – přenos UTM/gclid do odkazů na app.cleanpeace.cz + `dataLayer` událost `cta_click` (atributy `data-cta`, `data-loc`)
 - `assets/img/` – optimalizované WebP fotky, `IMG/` – zdrojové fotky (v `.gitignore`, na web nejdou)
-- Stránky mají `noindex` – jsou určené pro placené kampaně.
+- Stránky jsou indexovatelné, každá má `canonical` na čistou URL (bez gclid/utm). `404.html` má `noindex`.
 
 ## Nasazení
 1. Nahrát obsah této složky do kořene repozitáře (soubor `CNAME` už obsahuje `sluzby.cleanpeace.cz`).
