@@ -1,7 +1,8 @@
 /* CleanPeace – cookie lišta + Google Consent Mode v2
    Načítá se synchronně v <head> PŘED čímkoliv dalším, co měří.
 
-   - Výchozí stav: vše kromě nezbytného "denied" (opt-in dle § 89 odst. 3 z. č. 127/2005 Sb. a GDPR).
+   - Výchozí stav: v EHP/UK/CH vše kromě nezbytného "denied" (opt-in dle § 89 odst. 3 z. č. 127/2005 Sb. a GDPR),
+     mimo tyto regiony "granted".
    - Volba se ukládá do cookie cp_consent na .cleanpeace.cz (12 měsíců, při odmítnutí 6 měsíců).
    - Souhlas lze kdykoliv změnit/odvolat odkazem s atributem [data-cc-open] (v patičce).
    - Při odvolání smaže existující měřicí cookies.
@@ -27,6 +28,20 @@
   function gtag() { w.dataLayer.push(arguments); }
   w.gtag = w.gtag || gtag;
 
+  // Výchozí stav podle regionu (Google ho určuje z IP): v EHP, UK a Švýcarsku "denied" do volby v liště,
+  // mimo tyto regiony "granted" (stejně jako Complianz na cleanpeace.cz). Regionální default má přednost.
+  var EEA = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU',
+             'MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'];
+  gtag('consent', 'default', {
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+    analytics_storage: 'granted',
+    personalization_storage: 'granted',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
   gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
@@ -35,6 +50,7 @@
     personalization_storage: 'denied',
     functionality_storage: 'granted',
     security_storage: 'granted',
+    region: EEA,
     wait_for_update: 500
   });
   gtag('set', 'ads_data_redaction', true);
@@ -129,13 +145,17 @@
             '<label class="cc-row"><span><strong>Analytické</strong>Měření návštěvnosti a chování na webu (Google Analytics), abychom mohli web zlepšovat.</span><input type="checkbox" data-cc-cat="a"><i class="cc-sw" aria-hidden="true"></i></label>' +
             '<label class="cc-row"><span><strong>Marketingové</strong>Měření účinnosti reklam a jejich přizpůsobení (Google Ads, Sklik a další reklamní systémy).</span><input type="checkbox" data-cc-cat="m"><i class="cc-sw" aria-hidden="true"></i></label>' +
           '</div>' +
-          '<div class="cc-actions">' +
-            '<button type="button" class="btn btn-sm cc-btn-main" data-cc="reject">Odmítnout</button>' +
+          '<div class="cc-actions cc-actions--prefs" hidden>' +
+            '<button type="button" class="btn btn-sm cc-btn-line" data-cc="reject">Odmítnout vše</button>' +
+            '<button type="button" class="btn btn-sm cc-btn-line" data-cc="save">Uložit výběr</button>' +
+          '</div>' +
+          '<div class="cc-actions cc-actions--main">' +
             '<button type="button" class="btn btn-sm cc-btn-main" data-cc="accept">Přijmout vše</button>' +
           '</div>' +
-          '<div class="cc-more">' +
+          '<div class="cc-links">' +
             '<button type="button" class="cc-link" data-cc="settings">Nastavení</button>' +
-            '<button type="button" class="btn btn-sm cc-btn-save" data-cc="save" hidden>Uložit výběr</button>' +
+            '<span aria-hidden="true">·</span>' +
+            '<button type="button" class="cc-link" data-cc="continue">Pokračovat bez souhlasu</button>' +
           '</div>' +
         '</div>' +
       '</div>'
@@ -145,7 +165,7 @@
       if (!b) return;
       var act = b.getAttribute('data-cc');
       if (act === 'accept') save(true, true, 'accept_all');
-      else if (act === 'reject') save(false, false, 'reject');
+      else if (act === 'reject' || act === 'continue') save(false, false, 'reject');
       else if (act === 'settings') showPrefs();
       else if (act === 'save') save(q('[data-cc-cat="a"]').checked, q('[data-cc-cat="m"]').checked, 'custom');
     });
@@ -157,8 +177,8 @@
   function q(sel) { return box.querySelector(sel); }
   function showPrefs() {
     q('.cc-prefs').hidden = false;
-    q('[data-cc="settings"]').hidden = true;
-    q('[data-cc="save"]').hidden = false;
+    q('.cc-actions--prefs').hidden = false;
+    q('.cc-links').hidden = true;
     q('[data-cc-cat="a"]').focus();
   }
   function open(withPrefs) {
@@ -167,8 +187,8 @@
     q('[data-cc-cat="a"]').checked = !!(state && state.a);
     q('[data-cc-cat="m"]').checked = !!(state && state.m);
     q('.cc-prefs').hidden = true;
-    q('[data-cc="settings"]').hidden = false;
-    q('[data-cc="save"]').hidden = true;
+    q('.cc-actions--prefs').hidden = true;
+    q('.cc-links').hidden = false;
     box.classList.add('cc--open');
     d.documentElement.classList.add('cc-visible');
     if (withPrefs) showPrefs(); else q('[data-cc="accept"]').focus({ preventScroll: true });
