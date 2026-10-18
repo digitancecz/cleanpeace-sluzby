@@ -1,3 +1,5 @@
 .DS_Store
 # zdrojové fotky – na web jdou optimalizované verze z assets/img
 /IMG/
+# interní QA reporty – nepublikovat (Pages zveřejňuje celé repo)
+/qa/
